@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { Beer } from './beer';
-import { BEERS } from './beers';
 
 @Injectable({
   providedIn: 'root'
