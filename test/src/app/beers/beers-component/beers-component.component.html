@@ -1,0 +1,90 @@
+<section class="bg-primary sticky-top py-4 shadow">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <form>
+          <div class="row">
+            <div class="col-12 col-md-9 mb-2 d-flex align-items-center">
+              <label class="sr-only" for="q">Search</label>
+              <input id="q" name="q" [(ngModel)]="params.q" (input)="params._page = 1; getBeers();" type="text" class="form-control mb-0 form-control-lg"
+                id="search" placeholder="Search">
+            </div>
+            <div class="col-12 col-md-3">
+              <select id="sortOption" name="sortOption" [(ngModel)]="sortOption" (ngModelChange)="params._page = 1; sort();" class="custom-select custom-select-lg">
+                <option [ngValue]="option" *ngFor="let option of sortOptions">{{option.label}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<app-loading></app-loading>
+</section>
+<section class="py-4">
+  <div *ngIf="beers && totalBeers" class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 text-center text-md-left mb-4 mb-md-2">
+        <div class="d-flex align-items-center">
+          <label for="_sort" class="mb-0 mr-2">show</label>
+          <select id="_limit" name="_limit" [(ngModel)]="params._limit" (ngModelChange)="params._page = 1; getBeers();" class="custom-select w-auto"
+            id="inputGroupSelect01">
+            <option value="12">12</option>
+            <option value="24">24</option>
+            <option value="36">36</option>
+          </select>
+          <button class="btn ml-auto ml-md-4" [ngClass]="{'btn-primary': view == 'cards'}" (click)="changeView('cards')">
+            <fa-icon [icon]="faTh"></fa-icon>
+          </button>
+          <button class="btn ml-2" [ngClass]="{'btn-primary': view == 'list'}" (click)="changeView('list')">
+            <fa-icon [icon]="faBars"></fa-icon>
+          </button>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mb-2">
+        <div class="d-flex align-items-center float-md-right">
+          <button class="btn btn-primary mr-auto mr-md-0" (click)="decreasePage()" [disabled]="params._page < 2">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+          </button>
+          <span class="mx-auto mx-md-3">{{beers.length
+            < 1 ? 0 : (((params._page - 1) * params._limit) + 1)}} - {{beers.length + ((params._page - 1) * params._limit)}} of {{totalBeers.length}} results</span>
+          <button class="btn btn-primary ml-auto ml-md-0" (click)="increasePage()" [disabled]="beers.length < params._limit">
+            <fa-icon [icon]="faArrowRight"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-12">
+        <hr>
+      </div>
+    </div>
+    <div class="row mb-4 justify-content-center">
+      <div class="col-12 d-flex" [ngClass]="view == 'cards' ? 'mb-4 col-md-6 col-lg-4' : 'mb-3'" *ngFor="let beer of beers">
+        <app-beer-component class="w-100 h-100" appFadeInUp [beer]="beer" [view]="view"></app-beer-component>
+      </div>
+      <div *ngIf="beers.length < 1" class="col-12">
+        <div class="bg-light text-center w-100 rounded border py-5">
+          <p>No results found when searching for
+            <strong>"{{params.q}}"</strong>
+          </p>
+          <button class="btn btn-primary" (click)="params.q = ''; getBeers();">Reset search query</button>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-12 d-md-flex align-items-center">
+        <div class="d-flex mx-md-auto align-items-center">
+          <button class="btn btn-primary mr-auto mr-md-0" (click)="decreasePage()" [disabled]="params._page < 2">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+          </button>
+          <span class="mx-auto mx-md-3">{{beers.length
+            < 1 ? 0 : (((params._page - 1) * params._limit) + 1)}} - {{beers.length + ((params._page - 1) * params._limit)}} of {{totalBeers.length}} results</span>
+          <button class="btn btn-primary ml-auto ml-md-0" (click)="increasePage()" [disabled]="beers.length < params._limit">
+            <fa-icon [icon]="faArrowRight"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

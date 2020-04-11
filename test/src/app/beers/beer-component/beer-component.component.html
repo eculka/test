@@ -1,0 +1,26 @@
+<div class="card w-100 h-100" [ngStyle]="{borderColor: (beer.style | stringToColour)}">
+  <div class="card-header d-flex bg-light" [ngClass]="view == 'cards' ? 'flex-column' : 'align-items-center'" [ngStyle]="{borderBottomColor: (beer.style | stringToColour)}">
+    <span class="font-weight-bold" [ngClass]="{'mr-2 mb-md-1' : view == 'cards'}">{{beer.name}}</span>
+    <span class="d-flex align-items-center" [ngClass]="{'ml-auto' : view != 'cards'}">
+      <span class="dot mr-2" [ngStyle]="{background: (beer.style | stringToColour)}"></span>
+      {{beer.style}}</span>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div [ngClass]="view == 'cards' ? 'col-6' : 'col-6 col-md-4'">
+        <p [ngClass]="{'mb-0' : view == 'list'}">ABV: <strong>{{beer.abv * 0.01 | percent}}</strong></p>
+      </div>
+      <div [ngClass]="view == 'cards' ? 'col-6' : 'col-6 col-md-4'">
+        <p [ngClass]="view == 'cards' ? 'text-right' : 'text-right text-md-left mb-0'">IBU: <strong>{{beer.ibu}}</strong></p>
+      </div>
+      <div class="col-12" [ngClass]="view == 'cards' ? 'col-md-12' : 'col-md-4'">
+        <p [ngClass]="{'mb-0' : view == 'list'}">{{beer.city}}, {{beer.county}}</p>
+      </div>
+      <div class="col-12" [ngClass]="{'pt-2' : view == 'list'}">
+        <app-collapse-component *ngIf="beer.description">
+            <p class="mb-1">{{beer.description}}</p>
+        </app-collapse-component>
+      </div>
+    </div>
+  </div>
+</div>

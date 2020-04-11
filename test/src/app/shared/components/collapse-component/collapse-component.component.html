@@ -1,0 +1,4 @@
+<div>
+    <ng-content *ngIf="expanded"></ng-content>
+    <button class="btn px-0 py-1 rounded-0" (click)="toggleCollapse()">{{expanded ? 'less' : 'more'}} <fa-icon class="text-dark ml-1" [icon]="chevron"></fa-icon> </button>
+</div>
