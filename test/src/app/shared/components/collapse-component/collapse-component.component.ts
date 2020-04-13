@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+// Importing necessary font awesome icons
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -9,7 +10,10 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 })
 export class CollapseComponentComponent implements OnInit {
 
+  // Defining default state of collapse component
   expanded = false;
+
+  // Defining default chevron position
   chevron = faChevronDown;
 
   constructor() { }

@@ -9,8 +9,8 @@ import { Beer } from '../beer';
 })
 export class BeerComponentComponent implements OnInit {
 
-  @Input() beer;
-  @Input() view;
+  @Input() beer: Beer;
+  @Input() view: string;
 
   constructor() { }
 

@@ -10,7 +10,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es5",
+    "target": "es5", // Enabled es5 targeting for IE support
     "lib": [
       "es2018",
       "dom"
